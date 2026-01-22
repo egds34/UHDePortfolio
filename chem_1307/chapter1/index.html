@@ -31,7 +31,7 @@
                     <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">Rule: All certain digits + 1
                         estimated digit.</p>
                     <div class="example">
-                        Buret reads 2.34 - 2.36<br>
+                        Graduated cylinder reads 2.3 - 2.4<br>
                         Estimate: <span class="sig-dig">2.35</span><br>
                         The '5' is uncertain but <strong>significant</strong>.
                     </div>
@@ -43,7 +43,7 @@
                         <li>Always count as significant.</li>
                     </ul>
                     <div class="example">
-                        1234 has <span class="sig-dig">4</span> sig figs<br>
+                        1234 has <span class="sig-dig">4</span> sig figs or infinite sigfigs (see Exact Numbers)<br>
                         32.1 has <span class="sig-dig">3</span> sig figs
                     </div>
                 </div>
@@ -94,23 +94,40 @@
                     </ul>
                     <div class="example">
                         Converting inches to cm (1 in = 2.54 cm).<br>
-                        Counting: 3 apples.
+                        Counting: 3 (this is countable).
                     </div>
                     <div class="warning-box"
                         style="margin-top: 1rem; font-size: 0.9em; background-color: rgba(223, 142, 29, 0.1);">
                         <strong>Caution:</strong>
                         <p style="margin-top: 0.5rem;">
                             $$ 3 \times 54 = 162 $$
-                            (Here, 3 is an exact count of items. Result has infinite precision, limited only by 54.)
+                            Here, 3 and 54 are exact counts of items. Result has infinite sig figs.
                         </p>
                         <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
                         <p>
                             $$ 3 \times 5.3 = 20 $$
-                            (Here, 3 is a measurement with <strong>1 sig fig</strong>. Result must be rounded to 1 sig
-                            fig: \( 15.9 \rightarrow 20 \))
+                            Here, 3 is multiplied by a precise measurement so it's treated as 1 sig fig. Result must be
+                            rounded to 1 sig
+                            fig: \( 15.9 \rightarrow 20 \)
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <div class="practice-container">
+                <h3>Interactive Practice</h3>
+                <p>Test your knowledge! How many significant figures are in the number below?</p>
+
+                <div class="practice-problem" id="targetNumber">Loading...</div>
+
+                <div class="input-group">
+                    <input type="number" id="userGuess" class="practice-input" min="1" placeholder="#">
+                    <button class="btn" onclick="checkAnswer()">Check</button>
+                    <button class="btn" onclick="generateProblem()"
+                        style="background-color: var(--secondary-color);">Next</button>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
             </div>
         </section>
 
@@ -193,16 +210,17 @@
                 <div class="case incorrect">
                     <h5>Incorrect Intermediate Rounding</h5>
                     $$ 3.55 \times 3.3333 = 11.833215 $$
-                    $$ \text{Round to 3 sigs: } 11.8 $$
-                    $$ \text{Next: } \frac{11.8}{2.05} = 5.756... \rightarrow \mathbf{5.76} $$
+                    $$ \text{Round to 3 sigs (because of 3.55): } 11.8 $$
+                    $$ \text{Next: } \frac{11.8}{2.056} = 5.739299... $$
+                    $$ \text{Round to 3 sigs: } \mathbf{5.74} $$
                 </div>
 
                 <div class="case correct">
                     <h5>Correct Retention</h5>
                     $$ 3.55 \times 3.3333 = 11.833215 $$
-                    $$ \text{Track sigs: } 11.\underline{8}33215 $$
-                    $$ \text{Next: } \frac{11.833215}{2.05} = 5.7723... $$
-                    $$ \text{Round to 3 sigs: } \mathbf{5.77} $$
+                    $$ \text{Track 3 sigs (because of 3.55): } 11.\underline{8}33215 $$
+                    $$ \text{Next: } \frac{11.833215}{2.056} = 5.755454... $$
+                    $$ \text{Round to 3 sigs: } \mathbf{5.76} $$
                 </div>
             </div>
         </section>
