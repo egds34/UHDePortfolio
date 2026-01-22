@@ -233,7 +233,7 @@
 
     <script>
         let currentSigFigs = 0;
-        let currentType = 0;
+        let currentNumStr = "";
 
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -247,7 +247,6 @@
             // 3: Trailing zeros with decimal e.g., 150.00
 
             const type = getRandomInt(0, 3);
-            currentType = type;
             let numStr = "";
             let sfs = 0;
 
@@ -282,11 +281,13 @@
                 sfs = numStr.replace('.', '').length;
             }
 
-            document.getElementById('targetNumber').textContent = numStr;
+            currentNumStr = numStr;
             currentSigFigs = sfs;
+
+            document.getElementById('targetNumber').textContent = numStr;
             document.getElementById('userGuess').value = '';
             document.getElementById('feedback').textContent = '';
-            document.getElementById('explanation').textContent = '';
+            document.getElementById('explanation').innerHTML = '';
             document.getElementById('showAnswerBtn').style.display = 'none';
             document.getElementById('feedback').className = 'feedback';
             document.getElementById('userGuess').focus();
@@ -306,7 +307,7 @@
                 feedbackEl.textContent = "Correct! Great job.";
                 feedbackEl.className = 'feedback correct';
                 document.getElementById('showAnswerBtn').style.display = 'none';
-                document.getElementById('explanation').textContent = '';
+                document.getElementById('explanation').innerHTML = '';
             } else {
                 feedbackEl.textContent = "Incorrect. Try again!";
                 feedbackEl.className = 'feedback incorrect';
@@ -319,16 +320,38 @@
             const explanationEl = document.getElementById('explanation');
 
             feedbackEl.textContent = `The correct answer is ${currentSigFigs}.`;
-            feedbackEl.className = 'feedback incorrect'; // Keep warning color
+            feedbackEl.className = 'feedback incorrect';
 
-            let exp = "";
-            switch (currentType) {
-                case 0: exp = "All non-zero integers are significant."; break;
-                case 1: exp = "Leading zeros are NEVER significant. They only place the decimal."; break;
-                case 2: exp = "Captive zeros (sandwiched between non-zeros) are ALWAYS significant."; break;
-                case 3: exp = "Trailing zeros are significant ONLY when there is a decimal point."; break;
+            let rules = [];
+
+            // Analyze currentNumStr for all applicable rules
+
+            // 1. Leading Zeros
+            if (currentNumStr.startsWith("0.")) {
+                rules.push("<strong>Leading zeros</strong> (start of decimal) are <em>never</em> significant.");
             }
-            explanationEl.textContent = exp;
+
+            // 2. Captive Zeros (zeros between non-zeros)
+            let trimmed = currentNumStr;
+            if (currentNumStr.startsWith("0.")) {
+                trimmed = currentNumStr.replace(/^0\.0*/, '');
+            }
+            let digitsOnly = trimmed.replace('.', '');
+            if (/[1-9]0+[1-9]/.test(digitsOnly)) {
+                rules.push("<strong>Captive zeros</strong> (sandwiched between non-zeros) are <em>always</em> significant.");
+            }
+
+            // 3. Trailing Zeros
+            if (currentNumStr.includes('.') && currentNumStr.endsWith('0')) {
+                rules.push("<strong>Trailing zeros</strong> are significant here because there is a <em>decimal point</em>.");
+            }
+
+            // Fallback for simple integers
+            if (rules.length === 0) {
+                rules.push("All non-zero integers are significant.");
+            }
+
+            explanationEl.innerHTML = rules.join('<br>');
             document.getElementById('showAnswerBtn').style.display = 'none';
         }
 
