@@ -337,7 +337,36 @@
                 trimmed = currentNumStr.replace(/^0\.0*/, '');
             }
             let digitsOnly = trimmed.replace('.', '');
-            if (/[1-9]0+[1-9]/.test(digitsOnly)) {
+            // Check if there's any zero that has a non-zero digit before AND after it
+            let hasCaptiveZero = false;
+            for (let i = 1; i < digitsOnly.length - 1; i++) {
+                if (digitsOnly[i] === '0' && digitsOnly[i - 1] !== '0' && digitsOnly[i + 1] !== '0') {
+                    hasCaptiveZero = true;
+                    break;
+                }
+                // Also check for multiple zeros between non-zeros (e.g., 10003)
+                if (digitsOnly[i] === '0') {
+                    let hasNonZeroBefore = false;
+                    let hasNonZeroAfter = false;
+                    for (let j = i - 1; j >= 0; j--) {
+                        if (digitsOnly[j] !== '0') {
+                            hasNonZeroBefore = true;
+                            break;
+                        }
+                    }
+                    for (let j = i + 1; j < digitsOnly.length; j++) {
+                        if (digitsOnly[j] !== '0') {
+                            hasNonZeroAfter = true;
+                            break;
+                        }
+                    }
+                    if (hasNonZeroBefore && hasNonZeroAfter) {
+                        hasCaptiveZero = true;
+                        break;
+                    }
+                }
+            }
+            if (hasCaptiveZero) {
                 rules.push("<strong>Captive zeros</strong> (sandwiched between non-zeros) are <em>always</em> significant.");
             }
 
