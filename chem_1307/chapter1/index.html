@@ -256,14 +256,16 @@
                     <label for="difficultySlider"
                         style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Difficulty Level: <span
                             id="difficultyLabel">Medium</span></label>
-                    <input type="range" id="difficultySlider" min="1" max="3" value="2"
-                        style="width: 100%; max-width: 300px;"
+                    <input type="range" id="difficultySlider" min="1" max="5" value="3"
+                        style="width: 100%; max-width: 400px;"
                         oninput="updateDifficultyLabel(); generateMultistepProblem();">
                     <div
-                        style="display: flex; justify-content: space-between; max-width: 300px; font-size: 0.85em; color: var(--text-secondary);">
+                        style="display: flex; justify-content: space-between; max-width: 400px; font-size: 0.85em; color: var(--text-secondary);">
                         <span>Easy</span>
                         <span>Medium</span>
                         <span>Hard</span>
+                        <span>Very Hard</span>
+                        <span>Extreme</span>
                     </div>
                 </div>
 
