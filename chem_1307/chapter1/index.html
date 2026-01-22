@@ -227,6 +227,95 @@
 
     </div>
 
+    <script>
+        let currentSigFigs = 0;
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateProblem() {
+            // Types of problems:
+            // 0: Integers (non-zero) e.g., 12345
+            // 1: Leading zeros e.g., 0.00102
+            // 2: Captive zeros e.g., 1005
+            // 3: Trailing zeros with decimal e.g., 150.00
+
+            const type = getRandomInt(0, 3);
+            let numStr = "";
+            let sfs = 0;
+
+            if (type === 0) { // Large Integers (non-ambiguous, ensure no trailing zero)
+                let val = getRandomInt(1000, 999999);
+                numStr = val.toString();
+                // Ensure it doesn't end in 0 to avoid ambiguity
+                if (numStr.endsWith('0')) numStr = numStr.slice(0, -1) + getRandomInt(1, 9);
+                sfs = numStr.length;
+            }
+            else if (type === 1) { // Leading zeros (small numbers)
+                let zeros = "0.";
+                for (let i = 0; i < getRandomInt(2, 5); i++) zeros += "0"; // More leading zeros
+                let val = getRandomInt(1, 9999);
+                // Ensure val doesn't end in 0 so we don't accidentally make a trailing zero case here (handled separately)
+                while (val.toString().endsWith('0')) val = getRandomInt(1, 9999);
+                numStr = zeros + val;
+                sfs = val.toString().length;
+            }
+            else if (type === 2) { // Captive zeros (Confusing case)
+                let start = getRandomInt(1, 99);
+                let end = getRandomInt(1, 99);
+                let mid = "";
+                for (let i = 0; i < getRandomInt(2, 4); i++) mid += "0"; // 2 to 4 zeros in middle
+                numStr = start + mid + end;
+                sfs = numStr.length;
+            }
+            else if (type === 3) { // Trailing zeros with decimal (Precision case)
+                let val = getRandomInt(10, 9999);
+                numStr = val.toString();
+                if (!numStr.includes('.')) numStr += ".";
+                let added = getRandomInt(1, 4); // 1 to 4 trailing zeros
+                for (let i = 0; i < added; i++) numStr += "0";
+                // Sig figs = digits + trailing zeros
+                sfs = numStr.replace('.', '').length;
+            }
+
+            document.getElementById('targetNumber').textContent = numStr;
+            currentSigFigs = sfs;
+            document.getElementById('userGuess').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('userGuess').focus();
+        }
+
+        function checkAnswer() {
+            const userVal = parseInt(document.getElementById('userGuess').value);
+            const feedbackEl = document.getElementById('feedback');
+
+            if (isNaN(userVal)) {
+                feedbackEl.textContent = "Please enter a number.";
+                feedbackEl.className = 'feedback';
+                return;
+            }
+
+            if (userVal === currentSigFigs) {
+                feedbackEl.textContent = "Correct! Great job.";
+                feedbackEl.className = 'feedback correct';
+            } else {
+                feedbackEl.textContent = `Incorrect. The correct answer was ${currentSigFigs}.`;
+                feedbackEl.className = 'feedback incorrect';
+            }
+        }
+
+        // Init
+        window.onload = generateProblem;
+
+        // Allow Enter key
+        document.getElementById('userGuess').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+    </script>
 </body>
 
 </html>
