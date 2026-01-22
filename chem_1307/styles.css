@@ -1,11 +1,11 @@
-/* Catppuccin Latte Theme */
+/* Catppuccin Latte Theme (Pink Variant) */
 :root {
-  --primary-color: #179299;
-  /* Teal */
-  --secondary-color: #04a5e5;
-  /* Sky */
-  --accent-color: #df8e1d;
-  /* Yellow */
+  --primary-color: #ea76cb;
+  /* Pink */
+  --secondary-color: #dd7878;
+  /* Flamingo */
+  --accent-color: #dc8a78;
+  /* Rosewater */
   --bg-color: #eff1f5;
   /* Base */
   --card-bg: #e6e9ef;
