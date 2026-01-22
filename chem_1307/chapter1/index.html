@@ -26,7 +26,7 @@
             <h3>1. The Rules of Significant Figures</h3>
 
             <div class="card-grid">
-                <div class="card" style="border-left: 4px solid var(--accent-color);">
+                <div class="card">
                     <h4>Uncertain Digits</h4>
                     <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">Rule: All certain digits + 1
                         estimated digit.</p>
@@ -96,6 +96,20 @@
                         Converting inches to cm (1 in = 2.54 cm).<br>
                         Counting: 3 apples.
                     </div>
+                    <div class="warning-box"
+                        style="margin-top: 1rem; font-size: 0.9em; background-color: rgba(223, 142, 29, 0.1);">
+                        <strong>Caution:</strong>
+                        <p style="margin-top: 0.5rem;">
+                            $$ 3 \times 54 = 162 $$
+                            (Here, 3 is an exact count of items. Result has infinite precision, limited only by 54.)
+                        </p>
+                        <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+                        <p>
+                            $$ 3 \times 5.3 = 20 $$
+                            (Here, 3 is a measurement with <strong>1 sig fig</strong>. Result must be rounded to 1 sig
+                            fig: \( 15.9 \rightarrow 20 \))
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -130,15 +144,10 @@
 
         <section class="intermediate-section">
             <h3>3. Handling Intermediary Steps</h3>
-            <p>In multistep calculations, <strong>avoid rounding at every step</strong>. Rounding prematurely introduces
-                "round-off error".</p>
+            <p>In multistep calculations, <strong>do NOT round at every step</strong>. Instead, track the significant
+                figures of each step and round only at the final answer.</p>
 
-            <div class="warning-box">
-                <strong>The Golden Rule:</strong> Keep at least one or two extra "guard digits" (non-significant digits)
-                during intermediate steps, and round ONLY the very final result.
-            </div>
-
-            <h4>Comparison Example</h4>
+            <h4>Example</h4>
             <p>Problem: Calculate \( (2.34 \times 1.2) + 4.56 \) assuming strict sig fig rules.</p>
 
             <div class="intermediary-step">
@@ -194,7 +203,6 @@
                     $$ \text{Track sigs: } 11.\underline{8}33215 $$
                     $$ \text{Next: } \frac{11.833215}{2.05} = 5.7723... $$
                     $$ \text{Round to 3 sigs: } \mathbf{5.77} $$
-                    <p><em>Difference between 5.76 and 5.77 is purely due to rounding error!</em></p>
                 </div>
             </div>
         </section>
