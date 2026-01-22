@@ -318,17 +318,29 @@
         function showAnswer() {
             const feedbackEl = document.getElementById('feedback');
             const explanationEl = document.getElementById('explanation');
+            const numberEl = document.getElementById('targetNumber');
 
             feedbackEl.textContent = `The correct answer is ${currentSigFigs}.`;
             feedbackEl.className = 'feedback incorrect';
 
             let rules = [];
 
+            // Define colors for each rule type
+            const leadingColor = '#04a5e5'; // Sky blue
+            const captiveColor = '#40a02b'; // Green
+            const trailingColor = '#df8e1d'; // Yellow/Orange
+
+            // Track which parts of the number to highlight
+            let hasLeading = false;
+            let hasCaptive = false;
+            let hasTrailing = false;
+
             // Analyze currentNumStr for all applicable rules
 
             // 1. Leading Zeros
             if (currentNumStr.startsWith("0.")) {
-                rules.push("<strong>Leading zeros</strong> (start of decimal) are <em>never</em> significant.");
+                hasLeading = true;
+                rules.push(`<span style="color: ${leadingColor};"><strong>Leading zeros</strong> (start of decimal) are <em>never</em> significant.</span>`);
             }
 
             // 2. Captive Zeros (zeros between non-zeros)
@@ -337,14 +349,12 @@
                 trimmed = currentNumStr.replace(/^0\.0*/, '');
             }
             let digitsOnly = trimmed.replace('.', '');
-            // Check if there's any zero that has a non-zero digit before AND after it
             let hasCaptiveZero = false;
             for (let i = 1; i < digitsOnly.length - 1; i++) {
                 if (digitsOnly[i] === '0' && digitsOnly[i - 1] !== '0' && digitsOnly[i + 1] !== '0') {
                     hasCaptiveZero = true;
                     break;
                 }
-                // Also check for multiple zeros between non-zeros (e.g., 10003)
                 if (digitsOnly[i] === '0') {
                     let hasNonZeroBefore = false;
                     let hasNonZeroAfter = false;
@@ -367,17 +377,76 @@
                 }
             }
             if (hasCaptiveZero) {
-                rules.push("<strong>Captive zeros</strong> (sandwiched between non-zeros) are <em>always</em> significant.");
+                hasCaptive = true;
+                rules.push(`<span style="color: ${captiveColor};"><strong>Captive zeros</strong> (sandwiched between non-zeros) are <em>always</em> significant.</span>`);
             }
 
             // 3. Trailing Zeros
             if (currentNumStr.includes('.') && currentNumStr.endsWith('0')) {
-                rules.push("<strong>Trailing zeros</strong> are significant here because there is a <em>decimal point</em>.");
+                hasTrailing = true;
+                rules.push(`<span style="color: ${trailingColor};"><strong>Trailing zeros</strong> are significant here because there is a <em>decimal point</em>.</span>`);
             }
 
             // Fallback for simple integers
             if (rules.length === 0) {
                 rules.push("All non-zero integers are significant.");
+            }
+
+            // Highlight the number with color-coded parts
+            if (hasLeading || hasCaptive || hasTrailing) {
+                let result = '';
+                let i = 0;
+
+                // Handle leading zeros (0.00...)
+                if (hasLeading && currentNumStr.startsWith('0.')) {
+                    let leadingPart = currentNumStr.match(/^0\.0*/)[0];
+                    result += `<span style="background-color: ${leadingColor}33; color: ${leadingColor}; font-weight: bold;">${leadingPart}</span>`;
+                    i = leadingPart.length;
+                }
+
+                // Process remaining digits
+                let remaining = currentNumStr.substring(i);
+                let processedRemaining = '';
+
+                for (let j = 0; j < remaining.length; j++) {
+                    let char = remaining[j];
+
+                    // Check if this is a trailing zero
+                    if (hasTrailing && char === '0' && j >= remaining.lastIndexOf('0') && remaining.substring(j).match(/^0+$/)) {
+                        processedRemaining += `<span style="background-color: ${trailingColor}33; color: ${trailingColor}; font-weight: bold;">${remaining.substring(j)}</span>`;
+                        break;
+                    }
+                    // Check if this is a captive zero
+                    else if (hasCaptive && char === '0' && char !== '.') {
+                        let beforeHasNonZero = false;
+                        let afterHasNonZero = false;
+
+                        for (let k = i + j - 1; k >= 0; k--) {
+                            if (currentNumStr[k] !== '0' && currentNumStr[k] !== '.') {
+                                beforeHasNonZero = true;
+                                break;
+                            }
+                        }
+                        for (let k = i + j + 1; k < currentNumStr.length; k++) {
+                            if (currentNumStr[k] !== '0' && currentNumStr[k] !== '.') {
+                                afterHasNonZero = true;
+                                break;
+                            }
+                        }
+
+                        if (beforeHasNonZero && afterHasNonZero) {
+                            processedRemaining += `<span style="background-color: ${captiveColor}33; color: ${captiveColor}; font-weight: bold;">${char}</span>`;
+                        } else {
+                            processedRemaining += char;
+                        }
+                    }
+                    else {
+                        processedRemaining += char;
+                    }
+                }
+
+                result += processedRemaining;
+                numberEl.innerHTML = result;
             }
 
             explanationEl.innerHTML = rules.join('<br>');
