@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry 1307 - Measurements & Units</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -148,50 +153,85 @@
                 <div class="card">
                     <h4>Length</h4>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 0.3rem 0;">1 m = 100 cm</li>
-                        <li style="padding: 0.3rem 0;">1 m = 1000 mm</li>
-                        <li style="padding: 0.3rem 0;">1 km = 1000 m</li>
+                        <li style="padding: 0.3rem 0;">1 m = 100 cm <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 m = 1000 mm <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 km = 1000 m <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
                         <li
                             style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
-                            1 inch = 2.54 cm</li>
-                        <li style="padding: 0.3rem 0;">1 mile = 1.609 km</li>
+                            1 inch = 2.54 cm <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 mile ≈ 1.609 km</li>
                     </ul>
                 </div>
 
                 <div class="card">
                     <h4>Volume</h4>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 0.3rem 0;">1 L = 1000 mL</li>
-                        <li style="padding: 0.3rem 0;">1 L = 1 dm<sup>3</sup></li>
-                        <li style="padding: 0.3rem 0;">1 mL = 1 cm<sup>3</sup></li>
+                        <li style="padding: 0.3rem 0;">1 L = 1000 mL <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 L = 1 dm<sup>3</sup> <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 cm<sup>3</sup> = 1 cc = 1 mL <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
                         <li
                             style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
-                            1 gallon = 3.785 L</li>
-                        <li style="padding: 0.3rem 0;">1 quart = 0.946 L</li>
+                            1 gallon ≈ 3.785 L</li>
+                        <li style="padding: 0.3rem 0;">1 quart ≈ 0.946 L</li>
                     </ul>
                 </div>
 
                 <div class="card">
                     <h4>Mass</h4>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 0.3rem 0;">1 kg = 1000 g</li>
-                        <li style="padding: 0.3rem 0;">1 g = 1000 mg</li>
-                        <li style="padding: 0.3rem 0;">1 metric ton = 1000 kg</li>
+                        <li style="padding: 0.3rem 0;">1 kg = 1000 g <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 g = 1000 mg <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
+                        <li style="padding: 0.3rem 0;">1 metric ton = 1000 kg <span class="exact-tag"
+                                style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        </li>
                         <li
                             style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
-                            1 lb = 453.6 g</li>
-                        <li style="padding: 0.3rem 0;">1 oz = 28.35 g</li>
+                            1 lb ≈ 453.6 g</li>
+                        <li style="padding: 0.3rem 0;">1 kg ≈ 2.2046 lb</li>
+                        <li style="padding: 0.3rem 0;">1 oz ≈ 28.35 g</li>
                     </ul>
                 </div>
 
                 <div class="card">
-                    <h4>Temperature</h4>
+                    <h4>Temperature & Density</h4>
                     <div
                         style="background: var(--bg-secondary); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <p style="margin: 0.5rem 0;">$$ °C = \frac{5}{9}(°F - 32) $$</p>
-                        <p style="margin: 0.5rem 0;">$$ °F = \frac{9}{5}°C + 32 $$</p>
+                        <p style="margin: 0.5rem 0;"><strong>Temperature:</strong></p>
+                        <p style="margin: 0.5rem 0;">$$ °F = 1.8(°C) + 32 $$</p>
                         <p style="margin: 0.5rem 0;">$$ K = °C + 273.15 $$</p>
+                        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+                        <p style="margin: 0.5rem 0;"><strong>Density:</strong></p>
+                        <p style="margin: 0.5rem 0;">$$ D = \frac{mass}{volume} $$</p>
                     </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h4>Note on Exact Numbers</h4>
+                    <p>Values marked with <span class="exact-tag"
+                            style="font-size: 0.8em; color: var(--accent-color); background: #eef9ff; padding: 2px 4px; border-radius: 4px;">(exact)</span>
+                        are defined values. They have an <strong>infinite number of significant figures</strong>.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.95em; color: var(--text-secondary);">
+                        When performing calculations, exact numbers do <em>not</em> limit the precision of your result.
+                        Only approximate measurements affect the significant figures of your final answer.
+                    </p>
                 </div>
             </div>
         </section>
@@ -271,7 +311,8 @@
         <section class="practice-section">
             <h2>Uncertainty & Precision</h2>
             <p>All measurements have some degree of uncertainty. The last digit recorded is always an
-                <strong>estimate</strong>.</p>
+                <strong>estimate</strong>.
+            </p>
 
             <div class="card-grid">
                 <div class="card">
@@ -354,12 +395,6 @@
             </div>
         </section>
 
-        <!-- Navigation -->
-        <div
-            style="margin-top: 2rem; padding: 1.5rem; background: var(--card-bg); border-radius: 8px; text-align: center;">
-            <a href="index.html" class="btn" style="text-decoration: none; display: inline-block;">← Back to Significant
-                Figures</a>
-        </div>
     </div>
 </body>
 

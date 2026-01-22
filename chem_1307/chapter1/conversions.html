@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry 1307 - Conversions</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Dimensional Analysis</h1>
+            <p class="subtitle">Mastering unit conversions with the "Railroad Track" method</p>
+        </header>
+
+        <!-- The Method Section -->
+        <section class="practice-section">
+            <h2>The Base Unit Method</h2>
+            <p>When converting between two units that both have prefixes (like converting from
+                <strong>micrometers</strong> to <strong>petameters</strong>), always convert to the <strong>base
+                    unit</strong> first.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>The Golden Rule</h4>
+                    <p>When writing equivalence statements for prefixes:</p>
+                    <div
+                        style="background: #eef9ff; padding: 1rem; border-left: 4px solid var(--accent-color); margin: 1rem 0; font-weight: 500;">
+                        <p style="margin: 0;">1. The <strong>"1"</strong> always goes with the <strong>modified
+                                unit</strong> (the one with the prefix).</p>
+                        <p style="margin: 0.5rem 0 0 0;">2. The <strong>Power of 10</strong> always goes with the
+                            <strong>base unit</strong>.</p>
+                    </div>
+                    <div class="case correct">
+                        <h5>Example: Micro-</h5>
+                        <p>prefix: <strong>micro- ($\mu$)</strong>, factor: $10^{-6}$</p>
+                        <p style="font-family: 'Fira Code', monospace; margin-top: 0.5rem;">
+                            <strong>1</strong> $\mu m$ = <strong>$10^{-6}$</strong> $m$
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Two-Step Conversion Strategy</h4>
+                    <p>To convert from <strong>unit A</strong> to <strong>unit B</strong>:</p>
+                    <ol style="line-height: 1.8; margin-top: 0.5rem;">
+                        <li>Convert <strong>Unit A</strong> $\rightarrow$ <strong>Base Unit</strong></li>
+                        <li>Convert <strong>Base Unit</strong> $\rightarrow$ <strong>Unit B</strong></li>
+                    </ol>
+                    <div
+                        style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                        <strong>Example:</strong> Convert $\mu m$ to $Pm$
+                        <div
+                            style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.5rem; font-family: 'Fira Code', monospace;">
+                            <span>$\mu m$</span>
+                            <span>&rarr;</span>
+                            <span style="color: var(--accent-color); font-weight: bold;">$m$</span>
+                            <span>&rarr;</span>
+                            <span>$Pm$</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Railroad Tracks Section -->
+        <section class="practice-section">
+            <h2>Dimensional Analysis ("Railroad Tracks")</h2>
+            <p>Using a grid (or "railroad tracks") ensures your units cancel out correctly. Multiply numbers on the top,
+                divide by numbers on the bottom.</p>
+
+            <div class="card" style="margin-bottom: 2rem;">
+                <h4>Visual Guide</h4>
+                <div style="overflow-x: auto; padding: 1rem;">
+                    <!-- SVG Railroad Track visualization -->
+                    <svg width="600" height="120" style="font-family: 'Fira Code', monospace; font-size: 14px;">
+                        <!-- Horizontal Line -->
+                        <line x1="0" y1="60" x2="600" y2="60" stroke="var(--text-primary)" stroke-width="2" />
+                        <!-- Vertical Lines -->
+                        <line x1="150" y1="20" x2="150" y2="100" stroke="var(--text-primary)" stroke-width="2" />
+                        <line x1="350" y1="20" x2="350" y2="100" stroke="var(--text-primary)" stroke-width="2" />
+
+                        <!-- Content -->
+                        <!-- Start -->
+                        <text x="75" y="45" text-anchor="middle" fill="var(--text-primary)">Given</text>
+                        <text x="75" y="85" text-anchor="middle" fill="var(--text-secondary)">Unit A</text>
+
+                        <!-- Step 1 -->
+                        <text x="250" y="45" text-anchor="middle" fill="var(--accent-color)">Base Unit</text>
+                        <text x="250" y="85" text-anchor="middle" fill="var(--text-secondary)">1 Modified Unit A</text>
+
+                        <!-- Step 2 -->
+                        <text x="475" y="45" text-anchor="middle" fill="var(--secondary-color)">1 Modified Unit B</text>
+                        <text x="475" y="85" text-anchor="middle" fill="var(--accent-color)">Base Unit</text>
+
+                        <!-- Multiply/Divide Signs visual hints -->
+                        <text x="10" y="30" fill="var(--text-secondary)" font-size="10">Multiply &rarr;</text>
+                    </svg>
+                </div>
+                <div class="case correct">
+                    <h5>Example: Convert $4.5 \times 10^2$ $\mu m$ to $Pm$</h5>
+                    <p>
+                        $$ 4.5 \times 10^2 \text{ }\mu m \times \frac{10^{-6} \text{ } m}{1 \text{ } \mu m} \times
+                        \frac{1 \text{ } Pm}{10^{15} \text{ } m} = 4.5 \times 10^{-19} \text{ } Pm $$
+                    </p>
+                    <p style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem;">
+                        Note how $\mu m$ cancels with $\mu m$, and $m$ cancels with $m$, leaving only $Pm$.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Generator -->
+            <h3>Practice Conversions</h3>
+            <div class="practice-container">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 1rem; font-family: 'Fira Code', monospace;"
+                        id="conversionProblem">
+                        Loading...
+                    </div>
+
+                    <button class="btn" onclick="toggleSolution()" id="showSolutionBtn">Show Solution</button>
+                    <button class="btn" onclick="generateConversion()"
+                        style="background-color: var(--secondary-color);">Next Problem</button>
+
+                    <div id="conversionSolution"
+                        style="display: none; margin-top: 1.5rem; text-align: left; animation: fadeIn 0.3s ease;">
+                        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 1rem;">
+                        <h5>Railroad Track Solution:</h5>
+                        <div id="solutionMath" style="overflow-x: auto; padding: 1rem 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const prefixes = [
+            { name: 'peta', sym: 'P', exp: 15 },
+            { name: 'tera', sym: 'T', exp: 12 },
+            { name: 'giga', sym: 'G', exp: 9 },
+            { name: 'mega', sym: 'M', exp: 6 },
+            { name: 'kilo', sym: 'k', exp: 3 },
+            { name: 'base', sym: 'm', exp: 0 }, // base unit meters
+            { name: 'deci', sym: 'd', exp: -1 },
+            { name: 'centi', sym: 'c', exp: -2 },
+            { name: 'milli', sym: 'm', exp: -3 },
+            { name: 'micro', sym: 'μ', exp: -6 },
+            { name: 'nano', sym: 'n', exp: -9 },
+            { name: 'pico', sym: 'p', exp: -12 },
+            { name: 'femto', sym: 'f', exp: -15 },
+        ];
+
+        let currentProblem = {};
+
+        function generateConversion() {
+            // Pick two different prefixes
+            let p1, p2;
+            do {
+                p1 = prefixes[Math.floor(Math.random() * prefixes.length)];
+                p2 = prefixes[Math.floor(Math.random() * prefixes.length)];
+            } while (p1 === p2);
+
+            // Generate a number (scientific notation often useful here)
+            let coeff = (Math.random() * 9 + 1).toFixed(2);
+            let power = Math.floor(Math.random() * 5);
+            let valStr = `${coeff} \\times 10^{${power}}`;
+
+            // Allow for non-sci notation simpler numbers too
+            if (Math.random() > 0.5) {
+                valStr = (Math.random() * 100).toFixed(1);
+            }
+
+            // If unit is base, handle labeling carefully
+            let unit1 = p1.name === 'base' ? 'm' : `${p1.sym}m`;
+            let unit2 = p2.name === 'base' ? 'm' : `${p2.sym}m`;
+
+            document.getElementById('conversionProblem').innerHTML = `Convert <strong>${valStr} ${unit1}</strong> to <strong>${unit2}</strong>`;
+            document.getElementById('conversionSolution').style.display = 'none';
+            document.getElementById('showSolutionBtn').textContent = "Show Solution";
+
+            currentProblem = { valStr, p1, p2, unit1, unit2 };
+
+            if (window.MathJax) {
+                window.MathJax.typesetPromise ? window.MathJax.typesetPromise() : window.MathJax.typeset();
+            }
+        }
+
+        function toggleSolution() {
+            const solDiv = document.getElementById('conversionSolution');
+            const btn = document.getElementById('showSolutionBtn');
+            const mathContainer = document.getElementById('solutionMath');
+
+            if (solDiv.style.display === 'none') {
+                solDiv.style.display = 'block';
+                btn.textContent = "Hide Solution";
+
+                const { valStr, p1, p2, unit1, unit2 } = currentProblem;
+
+                // Build the LaTeX string for tracks
+                let latex = "";
+
+                // Track 1: Given -> Base (if needed)
+                // Track 2: Base -> Target (if needed)
+
+                // Case 1: Prefix -> Prefix (2 steps)
+                if (p1.name !== 'base' && p2.name !== 'base') {
+                    // Step 1: 1 p1 = 10^exp1 m
+                    // Step 2: 1 p2 = 10^exp2 m -> so 10^exp2 m / 1 p2 ? No we want to cancel m.
+                    // Multiply by (1 p2 / 10^exp2 m)
+
+                    latex = `$$ ${valStr} \\text{ } ${unit1} \\times \\frac{10^{${p1.exp}} \\text{ } m}{1 \\text{ } ${unit1}} \\times \\frac{1 \\text{ } ${unit2}}{10^{${p2.exp}} \\text{ } m} $$`;
+                }
+                // Case 2: Prefix -> Base (1 step)
+                else if (p1.name !== 'base' && p2.name === 'base') {
+                    latex = `$$ ${valStr} \\text{ } ${unit1} \\times \\frac{10^{${p1.exp}} \\text{ } m}{1 \\text{ } ${unit1}} $$`;
+                }
+                // Case 3: Base -> Prefix (1 step)
+                else if (p1.name === 'base' && p2.name !== 'base') {
+                    // Multiply by (1 p2 / 10^exp2 m)
+                    latex = `$$ ${valStr} \\text{ } m \\times \\frac{1 \\text{ } ${unit2}}{10^{${p2.exp}} \\text{ } m} $$`;
+                }
+
+                mathContainer.innerHTML = latex;
+                if (window.MathJax) {
+                    window.MathJax.typesetPromise ? window.MathJax.typesetPromise() : window.MathJax.typeset();
+                }
+
+            } else {
+                solDiv.style.display = 'none';
+                btn.textContent = "Show Solution";
+            }
+        }
+
+        // Init
+        window.addEventListener('DOMContentLoaded', generateConversion);
+    </script>
+</body>
+
+</html>
