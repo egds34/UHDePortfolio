@@ -401,28 +401,52 @@
                 rules.push("All non-zero integers are significant.");
             }
 
-            // Highlight the number with color-coded parts
-            if (hasLeading || hasCaptive || hasTrailing) {
-                let result = '';
-                let i = 0;
+            // Color-code and underline the number
+            let result = '';
+            let i = 0;
 
+            // Determine which digits are significant
+            let significantIndices = new Set();
+
+            // All digits are significant except leading zeros
+            if (currentNumStr.startsWith('0.')) {
+                let leadingPart = currentNumStr.match(/^0\.0*/)[0];
+                // Everything after leading zeros is significant
+                for (let idx = leadingPart.length; idx < currentNumStr.length; idx++) {
+                    if (currentNumStr[idx] !== '.') {
+                        significantIndices.add(idx);
+                    }
+                }
+            } else {
+                // All non-decimal digits are significant
+                for (let idx = 0; idx < currentNumStr.length; idx++) {
+                    if (currentNumStr[idx] !== '.') {
+                        significantIndices.add(idx);
+                    }
+                }
+            }
+
+            // Build the colored/underlined string
+            if (hasLeading || hasCaptive || hasTrailing) {
                 // Handle leading zeros (0.00...)
                 if (hasLeading && currentNumStr.startsWith('0.')) {
                     let leadingPart = currentNumStr.match(/^0\.0*/)[0];
-                    result += `<span style="background-color: ${leadingColor}33; color: ${leadingColor}; font-weight: bold;">${leadingPart}</span>`;
+                    result += `<span style="color: ${leadingColor}; font-weight: bold;">${leadingPart}</span>`;
                     i = leadingPart.length;
                 }
 
                 // Process remaining digits
                 let remaining = currentNumStr.substring(i);
-                let processedRemaining = '';
 
                 for (let j = 0; j < remaining.length; j++) {
                     let char = remaining[j];
+                    let globalIdx = i + j;
+                    let isSignificant = significantIndices.has(globalIdx);
+                    let underline = isSignificant ? 'text-decoration: underline; text-decoration-color: #d20f39; text-decoration-thickness: 2px;' : '';
 
                     // Check if this is a trailing zero
                     if (hasTrailing && char === '0' && j >= remaining.lastIndexOf('0') && remaining.substring(j).match(/^0+$/)) {
-                        processedRemaining += `<span style="background-color: ${trailingColor}33; color: ${trailingColor}; font-weight: bold;">${remaining.substring(j)}</span>`;
+                        result += `<span style="color: ${trailingColor}; font-weight: bold; ${underline}">${remaining.substring(j)}</span>`;
                         break;
                     }
                     // Check if this is a captive zero
@@ -444,17 +468,16 @@
                         }
 
                         if (beforeHasNonZero && afterHasNonZero) {
-                            processedRemaining += `<span style="background-color: ${captiveColor}33; color: ${captiveColor}; font-weight: bold;">${char}</span>`;
+                            result += `<span style="color: ${captiveColor}; font-weight: bold; ${underline}">${char}</span>`;
                         } else {
-                            processedRemaining += char;
+                            result += isSignificant ? `<span style="${underline}">${char}</span>` : char;
                         }
                     }
                     else {
-                        processedRemaining += char;
+                        result += isSignificant ? `<span style="${underline}">${char}</span>` : char;
                     }
                 }
 
-                result += processedRemaining;
                 numberEl.innerHTML = result;
             }
 
