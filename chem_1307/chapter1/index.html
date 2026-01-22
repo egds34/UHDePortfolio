@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry 1307 - Significant Figures</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>CHEM 1307</h1>
+            <h2>Chapter 1: Significant Figures & Data Handling</h2>
+        </header>
+
+        <section>
+            <h3>1. The Rules of Significant Figures</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Non-Zero Integers</h4>
+                    <ul class="rules-list">
+                        <li>Always count as significant.</li>
+                    </ul>
+                    <div class="example">
+                        1234 has <span class="sig-dig">4</span> sig figs<br>
+                        32.1 has <span class="sig-dig">3</span> sig figs
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Leading Zeros</h4>
+                    <ul class="rules-list">
+                        <li>Zeros that precede all non-zero digits.</li>
+                        <li><strong>Never</strong> significant. They just place the decimal.</li>
+                    </ul>
+                    <div class="example">
+                        <span class="non-sig-dig">0.00</span>25 has <span class="sig-dig">2</span> sig figs<br>
+                        <span class="non-sig-dig">0.</span>416 has <span class="sig-dig">3</span> sig figs
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Captive Zeros</h4>
+                    <ul class="rules-list">
+                        <li>Zeros between non-zero digits.</li>
+                        <li><strong>Always</strong> significant.</li>
+                    </ul>
+                    <div class="example">
+                        1<span class="sig-dig">00</span>8 has <span class="sig-dig">4</span> sig figs<br>
+                        5.<span class="sig-dig">0</span>2 has <span class="sig-dig">3</span> sig figs
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Trailing Zeros</h4>
+                    <ul class="rules-list">
+                        <li>Zeros at the right end of the number.</li>
+                        <li>Significant <strong>ONLY if</strong> the number contains a decimal point.</li>
+                    </ul>
+                    <div class="example">
+                        100 has <span class="sig-dig">1</span> sig fig (ambiguous, assume 1)<br>
+                        100<span class="sig-dig">.</span> has <span class="sig-dig">3</span> sig figs<br>
+                        100.0 has <span class="sig-dig">4</span> sig figs<br>
+                        0.020 has <span class="sig-dig">2</span> sig figs
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Exact Numbers</h4>
+                    <ul class="rules-list">
+                        <li>Numbers determined by counting or specific definition.</li>
+                        <li>Have an <strong>infinite</strong> number of sig figs.</li>
+                    </ul>
+                    <div class="example">
+                        Converting inches to cm (1 in = 2.54 cm).<br>
+                        Counting: 3 apples.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>2. Mathematical Operations</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Multiplication & Division</h4>
+                    <p>The result holds the same number of significant figures as the measurement with the
+                        <strong>FEWEST significant figures</strong>.
+                    </p>
+                    <div class="example" style="margin-top: 1rem;">
+                        4.56 (3 sigs) × 1.4 (2 sigs) = 6.384<br>
+                        Round to 2 sigs: <strong>6.4</strong>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Addition & Subtraction</h4>
+                    <p>The result has the same number of <strong>decimal places</strong> as the measurement with the
+                        <strong>FEWEST decimal places</strong>.
+                    </p>
+                    <div class="example" style="margin-top: 1rem;">
+                        12.11 (2 dec) + 18.0 (1 dec) + 1.013 (3 dec) = 31.123<br>
+                        Limiting term: 18.0 (1 decimal place)<br>
+                        Round to 1 decimal: <strong>31.1</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="intermediate-section">
+            <h3>3. Handling Intermediary Steps</h3>
+            <p>In multistep calculations, <strong>avoid rounding at every step</strong>. Rounding prematurely introduces
+                "round-off error" which can make your final answer incorrect, especially in sensitive calculations or
+                online homework systems.</p>
+
+            <div class="warning-box">
+                <strong>The Golden Rule:</strong> Keep at least one or two extra "guard digits" (non-significant digits)
+                during intermediate steps, and round ONLY the very final result. Alternatively, use the memory function
+                of your calculator to store the full value.
+            </div>
+
+            <h4>Comparison Example</h4>
+            <p>Problem: Calculate <code>(2.34 × 1.2) + 4.56</code> assuming strict sig fig rules.</p>
+            <p><em>Operations order: Multiplication first, then addition.</em></p>
+
+            <div class="intermediary-step">
+                <div class="comparison">
+                    <div class="case incorrect">
+                        <h5>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                            Incorrect (Rounding too early)
+                        </h5>
+                        <p><strong>Step 1:</strong> Multiply</p>
+                        <div class="math-row">2.34 × 1.2 = 2.808</div>
+                        <p><em>Limiting sigs: 1.2 (2 sig figs). Round immediately.</em></p>
+                        <div class="math-row">Result: <strong>2.8</strong></div>
+                        <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+                        <p><strong>Step 2:</strong> Add</p>
+                        <div class="math-row">2.8 + 4.56 = 7.36</div>
+                        <p><em>Limiting decimals: 2.8 (1 decimal place).</em></p>
+                        <div class="math-row">Final Answer: <strong>7.4</strong></div>
+                    </div>
+
+                    <div class="case correct">
+                        <h5>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Correct (Tracking Sig Figs)
+                        </h5>
+                        <p><strong>Step 1:</strong> Multiply</p>
+                        <div class="math-row">2.34 × 1.2 = 2.808</div>
+                        <p><em>Limiting sigs: 1.2 (2 sig figs).
+                                <br>Do NOT round yet. Track the last significant digit.</em></p>
+                        <div class="math-row">Result tracked: 2.<span class="underline-sig">8</span>08</div>
+                        <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;">
+                        <p><strong>Step 2:</strong> Add</p>
+                        <div class="math-row">2.<span class="underline-sig">8</span>08 + 4.56 = 7.368</div>
+                        <p><em>Limiting rule: Addition relies on precision (decimal places).
+                                <br>2.<span class="underline-sig">8</span>08 ends at the <strong>tenths</strong> place
+                                (due to 1.2).
+                                <br>4.56 ends at the <strong>hundredths</strong> place.
+                                <br>The least precise is the tenths place.</em></p>
+                        <p>Round 7.368 to tenths place.</p>
+                        <div class="math-row">Final Answer: <strong>7.4</strong><br></div>
+                        <p><em>(Note: In this specific simple case, they match, but see below for a case where they
+                                diverge!)</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <h4>Divergent Example (Where it matters)</h4>
+            <p>Problem: Perform <code>3.55 × 3.3333</code> if the target is 3 significant figures.</p>
+
+            <div class="comparison">
+                <div class="case incorrect">
+                    <h5>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        Incorrect Intermediate Rounding
+                    </h5>
+                    <p>Imagine this was part of a larger chain like: <code>(3.55 × 3.3333) / 2.05</code></p>
+                    <div class="math-row">3.55 × 3.3333 = 11.833215</div>
+                    <div class="math-row">Round to 3 sigs: <strong>11.8</strong></div>
+                    <div class="math-row">Next: 11.8 / 2.05 = <strong>5.756...</strong> -> <strong>5.76</strong></div>
+                </div>
+
+                <div class="case correct">
+                    <h5>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Correct Retention
+                    </h5>
+                    <div class="math-row">3.55 × 3.3333 = 11.833215</div>
+                    <div class="math-row">Track sigs: 11.<span class="underline-sig">8</span>33215</div>
+                    <div class="math-row">Next: 11.833215 / 2.05 = <strong>5.7723...</strong></div>
+                    <div class="math-row">Round to 3 sigs: <strong>5.77</strong></div>
+                    <p><em>Difference between 5.76 and 5.77 is purely due to rounding error!</em></p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>
