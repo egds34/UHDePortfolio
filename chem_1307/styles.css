@@ -1,25 +1,27 @@
-/* Light Theme Only */
+/* Catppuccin Latte Theme */
 :root {
-  --primary-color: #0f766e;
-  /* Teal 700 */
-  --secondary-color: #0d9488;
-  /* Teal 600 */
-  --accent-color: #f59e0b;
-  /* Amber 500 */
-  --bg-color: #ffffff;
-  /* White force */
-  --card-bg: #ffffff;
-  --text-primary: #1e293b;
-  /* Slate 800 */
-  --text-secondary: #475569;
-  /* Slate 600 */
-  --code-bg: #f1f5f9;
-  /* Lighter code bg for light theme */
-  --code-text: #0f172a;
-  --success: #059669;
-  /* Darker green for text readability */
-  --error: #dc2626;
-  /* Darker red */
+  --primary-color: #179299;
+  /* Teal */
+  --secondary-color: #04a5e5;
+  /* Sky */
+  --accent-color: #df8e1d;
+  /* Yellow */
+  --bg-color: #eff1f5;
+  /* Base */
+  --card-bg: #e6e9ef;
+  /* Mantle */
+  --text-primary: #4c4f69;
+  /* Text */
+  --text-secondary: #6c6f85;
+  /* Subtext0 */
+  --code-bg: #dce0e8;
+  /* Crust */
+  --code-text: #4c4f69;
+  /* Text */
+  --success: #40a02b;
+  /* Green */
+  --error: #d20f39;
+  /* Red */
 }
 
 
