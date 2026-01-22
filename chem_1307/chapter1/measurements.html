@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry 1307 - Measurements & Units</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Measurements & Units</h1>
+            <p class="subtitle">Understanding metric prefixes, conversions, and measurement precision</p>
+        </header>
+
+        <!-- Metric Prefixes Section -->
+        <section class="practice-section">
+            <h2>Metric Prefixes</h2>
+            <p>The metric system uses prefixes to denote powers of 10. Understanding these prefixes is essential for
+                scientific measurements.</p>
+
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="card">
+                    <h4>Large Prefixes</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem; text-align: left;">Prefix</th>
+                                <th style="padding: 0.5rem; text-align: left;">Symbol</th>
+                                <th style="padding: 0.5rem; text-align: right;">Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem;">peta-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--accent-color);">P</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>15</sup></td>
+                            </tr>
+                            <tr style="background: var(--bg-secondary);">
+                                <td style="padding: 0.5rem;">tera-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--accent-color);">T</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>12</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">giga-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--accent-color);">G</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>9</sup></td>
+                            </tr>
+                            <tr style="background: var(--bg-secondary);">
+                                <td style="padding: 0.5rem;">mega-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--accent-color);">M</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>6</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">kilo-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--accent-color);">k</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>3</sup></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h4>Small Prefixes</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem; text-align: left;">Prefix</th>
+                                <th style="padding: 0.5rem; text-align: left;">Symbol</th>
+                                <th style="padding: 0.5rem; text-align: right;">Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem;">deci-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">d</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-1</sup></td>
+                            </tr>
+                            <tr style="background: var(--bg-secondary);">
+                                <td style="padding: 0.5rem;">centi-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">c</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-2</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">milli-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">m</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-3</sup></td>
+                            </tr>
+                            <tr style="background: var(--bg-secondary);">
+                                <td style="padding: 0.5rem;">micro-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">μ</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-6</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">nano-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">n</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-9</sup></td>
+                            </tr>
+                            <tr style="background: var(--bg-secondary);">
+                                <td style="padding: 0.5rem;">pico-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">p</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-12</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">femto-</td>
+                                <td style="padding: 0.5rem; font-weight: bold; color: var(--secondary-color);">f</td>
+                                <td style="padding: 0.5rem; text-align: right; font-family: 'Fira Code', monospace;">
+                                    10<sup>-15</sup></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h4>Memory Aid</h4>
+                <p style="font-style: italic; color: var(--text-secondary);">
+                    "King Henry Died By Drinking Chocolate Milk" (kilo, hecto, deka, base, deci, centi, milli)
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    For smaller units: <span style="font-style: italic; color: var(--text-secondary);">"My Naughty
+                        Penguin Flew"</span> (micro, nano, pico, femto)
+                </p>
+            </div>
+        </section>
+
+        <!-- Common Unit Conversions Section -->
+        <section class="practice-section">
+            <h2>Common Unit Conversions</h2>
+            <p>These conversion factors are essential for chemistry calculations.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Length</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.3rem 0;">1 m = 100 cm</li>
+                        <li style="padding: 0.3rem 0;">1 m = 1000 mm</li>
+                        <li style="padding: 0.3rem 0;">1 km = 1000 m</li>
+                        <li
+                            style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
+                            1 inch = 2.54 cm</li>
+                        <li style="padding: 0.3rem 0;">1 mile = 1.609 km</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Volume</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.3rem 0;">1 L = 1000 mL</li>
+                        <li style="padding: 0.3rem 0;">1 L = 1 dm<sup>3</sup></li>
+                        <li style="padding: 0.3rem 0;">1 mL = 1 cm<sup>3</sup></li>
+                        <li
+                            style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
+                            1 gallon = 3.785 L</li>
+                        <li style="padding: 0.3rem 0;">1 quart = 0.946 L</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Mass</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.3rem 0;">1 kg = 1000 g</li>
+                        <li style="padding: 0.3rem 0;">1 g = 1000 mg</li>
+                        <li style="padding: 0.3rem 0;">1 metric ton = 1000 kg</li>
+                        <li
+                            style="padding: 0.3rem 0; border-top: 1px solid var(--border-color); margin-top: 0.5rem; padding-top: 0.5rem;">
+                            1 lb = 453.6 g</li>
+                        <li style="padding: 0.3rem 0;">1 oz = 28.35 g</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Temperature</h4>
+                    <div
+                        style="background: var(--bg-secondary); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <p style="margin: 0.5rem 0;">$$ °C = \frac{5}{9}(°F - 32) $$</p>
+                        <p style="margin: 0.5rem 0;">$$ °F = \frac{9}{5}°C + 32 $$</p>
+                        <p style="margin: 0.5rem 0;">$$ K = °C + 273.15 $$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading Meniscus Section -->
+        <section class="practice-section">
+            <h2>Reading the Meniscus</h2>
+            <p>When measuring liquids in graduated cylinders, always read at the bottom of the meniscus (the curved
+                surface).</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>What is a Meniscus?</h4>
+                    <p>A meniscus is the curve seen at the top of a liquid in response to its container. Most liquids
+                        (like water) form a <strong>concave meniscus</strong> that curves downward.</p>
+                    <div
+                        style="background: var(--bg-secondary); padding: 1rem; border-radius: 4px; margin-top: 1rem; text-align: center;">
+                        <svg width="200" height="150" viewBox="0 0 200 150" style="max-width: 100%;">
+                            <!-- Graduated cylinder -->
+                            <rect x="60" y="20" width="80" height="110" fill="none" stroke="var(--text-primary)"
+                                stroke-width="2" />
+                            <!-- Graduation marks -->
+                            <line x1="60" y1="50" x2="70" y2="50" stroke="var(--text-secondary)" stroke-width="1" />
+                            <line x1="60" y1="70" x2="70" y2="70" stroke="var(--text-secondary)" stroke-width="1" />
+                            <line x1="60" y1="90" x2="75" y2="90" stroke="var(--text-primary)" stroke-width="2" />
+                            <line x1="60" y1="110" x2="70" y2="110" stroke="var(--text-secondary)" stroke-width="1" />
+                            <!-- Water -->
+                            <rect x="62" y="92" width="76" height="36" fill="#04a5e5" opacity="0.3" />
+                            <!-- Meniscus curve -->
+                            <path d="M 62 90 Q 100 95 138 90" fill="none" stroke="#04a5e5" stroke-width="2" />
+                            <path d="M 62 90 L 62 92 L 138 92 L 138 90" fill="#04a5e5" opacity="0.3" />
+                            <!-- Arrow pointing to bottom of meniscus -->
+                            <line x1="150" y1="92" x2="140" y2="92" stroke="#d20f39" stroke-width="2"
+                                marker-end="url(#arrowhead)" />
+                            <text x="155" y="95" fill="#d20f39" font-size="12" font-weight="bold">Read here</text>
+                            <!-- Labels -->
+                            <text x="45" y="53" fill="var(--text-secondary)" font-size="10">30</text>
+                            <text x="45" y="73" fill="var(--text-secondary)" font-size="10">25</text>
+                            <text x="40" y="93" fill="var(--text-primary)" font-size="12" font-weight="bold">20</text>
+                            <text x="45" y="113" fill="var(--text-secondary)" font-size="10">15</text>
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+                                    orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#d20f39" />
+                                </marker>
+                            </defs>
+                        </svg>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em; color: var(--text-secondary);">Always read at
+                            eye level at the bottom of the curve</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Proper Technique</h4>
+                    <ol style="line-height: 1.8;">
+                        <li><strong>Eye Level:</strong> Position your eyes at the same level as the meniscus to avoid
+                            parallax error</li>
+                        <li><strong>Bottom of Curve:</strong> Read the measurement at the <em>lowest point</em> of the
+                            meniscus</li>
+                        <li><strong>Estimate:</strong> Record one digit beyond the smallest graduation (the uncertain
+                            digit)</li>
+                        <li><strong>Lighting:</strong> Ensure good lighting to clearly see the meniscus</li>
+                    </ol>
+                    <div class="case incorrect" style="margin-top: 1rem;">
+                        <h5>Common Mistakes</h5>
+                        <ul style="margin: 0.5rem 0;">
+                            <li>Reading from above or below (parallax error)</li>
+                            <li>Reading the top of the meniscus instead of the bottom</li>
+                            <li>Not estimating the uncertain digit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uncertainty in Measurements Section -->
+        <section class="practice-section">
+            <h2>Uncertainty & Precision</h2>
+            <p>All measurements have some degree of uncertainty. The last digit recorded is always an
+                <strong>estimate</strong>.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>The Uncertain Digit</h4>
+                    <p>When using any measuring device, you should record all certain digits plus <strong>one estimated
+                            (uncertain) digit</strong>.</p>
+                    <div class="case correct" style="margin-top: 1rem;">
+                        <h5>Example: Ruler Measurement</h5>
+                        <p>A ruler marked in centimeters with millimeter subdivisions:</p>
+                        <ul style="margin: 0.5rem 0;">
+                            <li><strong>Certain digits:</strong> Can be read directly from markings</li>
+                            <li><strong>Uncertain digit:</strong> Estimated between the smallest markings</li>
+                        </ul>
+                        <p
+                            style="margin-top: 0.5rem; padding: 0.5rem; background: var(--bg-secondary); border-radius: 4px;">
+                            If an object falls between 2.3 cm and 2.4 cm, you might record <strong>2.37 cm</strong><br>
+                            <span style="font-size: 0.9em; color: var(--text-secondary);">The '7' is your estimated
+                                digit</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Precision vs Accuracy</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div style="text-align: center;">
+                            <div
+                                style="background: var(--accent-color); color: white; padding: 0.5rem; border-radius: 4px; font-weight: bold;">
+                                Precision</div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9em;">How close measurements are to <em>each
+                                    other</em></p>
+                            <p style="font-size: 0.85em; color: var(--text-secondary);">Reproducibility</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div
+                                style="background: var(--secondary-color); color: white; padding: 0.5rem; border-radius: 4px; font-weight: bold;">
+                                Accuracy</div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9em;">How close a measurement is to the <em>true
+                                    value</em></p>
+                            <p style="font-size: 0.85em; color: var(--text-secondary);">Correctness</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 4px;">
+                        <p style="margin: 0; font-size: 0.9em;"><strong>Ideal:</strong> High precision AND high accuracy
+                        </p>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.85em; color: var(--text-secondary);">Measurements
+                            cluster tightly around the true value</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Significant Figures in Measurements</h4>
+                    <p>The number of significant figures indicates the precision of a measurement.</p>
+                    <div class="case correct">
+                        <h5>More Precise Instrument</h5>
+                        <p style="font-family: 'Fira Code', monospace; font-size: 1.1em;">12.45 g</p>
+                        <p style="font-size: 0.9em; color: var(--text-secondary);">4 significant figures</p>
+                    </div>
+                    <div class="case incorrect" style="margin-top: 0.5rem;">
+                        <h5>Less Precise Instrument</h5>
+                        <p style="font-family: 'Fira Code', monospace; font-size: 1.1em;">12 g</p>
+                        <p style="font-size: 0.9em; color: var(--text-secondary);">2 significant figures</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Recording Measurements</h4>
+                    <ol style="line-height: 1.8;">
+                        <li>Read all certain digits from the scale</li>
+                        <li>Estimate one more digit between the smallest divisions</li>
+                        <li>Record the measurement with the proper number of significant figures</li>
+                        <li>Include units with every measurement</li>
+                    </ol>
+                    <div
+                        style="margin-top: 1rem; padding: 0.75rem; background: #eef9ff; border-left: 3px solid #04a5e5; border-radius: 4px;">
+                        <p style="margin: 0; font-size: 0.9em;"><strong>Remember:</strong> Never record more digits than
+                            your instrument can measure!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div
+            style="margin-top: 2rem; padding: 1.5rem; background: var(--card-bg); border-radius: 8px; text-align: center;">
+            <a href="index.html" class="btn" style="text-decoration: none; display: inline-block;">← Back to Significant
+                Figures</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -13,6 +13,7 @@
         rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.js"></script>
 </head>
 
 <body>
@@ -79,7 +80,7 @@
                         <li>Significant <strong>ONLY if</strong> the number contains a decimal point.</li>
                     </ul>
                     <div class="example">
-                        100 has <span class="sig-dig">1</span> sig fig (ambiguous, assume 1)<br>
+                        100 has <span class="sig-dig">1</span> sig fig<br>
                         100<span class="sig-dig">.</span> has <span class="sig-dig">3</span> sig figs<br>
                         100.0 has <span class="sig-dig">4</span> sig figs<br>
                         0.020 has <span class="sig-dig">2</span> sig figs
@@ -115,7 +116,7 @@
             </div>
 
             <div class="practice-container">
-                <h3>Interactive Practice</h3>
+                <h3>Practice</h3>
                 <p>Test your knowledge! How many significant figures are in the number below?</p>
 
                 <div class="practice-problem" id="targetNumber">Loading...</div>
@@ -163,7 +164,7 @@
             </div>
 
             <div class="practice-container">
-                <h3>Interactive Practice: Operations</h3>
+                <h3>Practice</h3>
                 <p>Solve the calculation and round to the correct number of significant figures.</p>
 
                 <div class="practice-problem" id="mathProblem">Loading...</div>
@@ -249,27 +250,25 @@
             </div>
 
             <div class="practice-container">
-                <h3>Interactive Practice: Multistep Calculations</h3>
+                <h3>Practice</h3>
                 <p>Solve the multistep calculation without rounding intermediate steps.</p>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <label for="difficultySlider"
-                        style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Difficulty Level: <span
-                            id="difficultyLabel">Medium</span></label>
-                    <input type="range" id="difficultySlider" min="1" max="5" value="3"
-                        style="width: 100%; max-width: 400px;"
-                        oninput="updateDifficultyLabel(); generateMultistepProblem();">
-                    <div
-                        style="display: flex; justify-content: space-between; max-width: 400px; font-size: 0.85em; color: var(--text-secondary);">
-                        <span>Easy</span>
-                        <span>Medium</span>
-                        <span>Hard</span>
-                        <span>Very Hard</span>
-                        <span>Extreme</span>
+
+                <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
+                    <div style="width: 100%; max-width: 400px;">
+                        <label for="difficultySlider"
+                            style="display: block; margin-bottom: 0.5rem; font-weight: 600; text-align: center;">Difficulty
+                            Level: <span id="difficultyLabel">Medium</span></label>
+                        <input type="range" id="difficultySlider" min="1" max="5" value="3"
+                            style="width: 100%; margin: 0;"
+                            oninput="updateDifficultyLabel(); generateMultistepProblem();">
                     </div>
                 </div>
 
+
+
                 <div class="practice-problem" id="multistepProblem" style="font-size: 1.1em;">Loading...</div>
+
 
                 <div class="input-group">
                     <input type="text" id="multistepGuess" class="practice-input" placeholder="0" style="width: 150px;">
@@ -355,8 +354,6 @@
             if (leadingCard) leadingCard.style.backgroundColor = '';
             if (captiveCard) captiveCard.style.backgroundColor = '';
             if (trailingCard) trailingCard.style.backgroundColor = '';
-
-            document.getElementById('userGuess').focus();
         }
 
         function checkAnswer() {
@@ -453,6 +450,13 @@
                 rules.push(`<span style="color: ${trailingColor};"><strong>Trailing zeros</strong> are significant here because there is a <em>decimal point</em>.</span>`);
             }
 
+            // 3b. Trailing zeros WITHOUT decimal (ambiguous/not significant)
+            let hasTrailingNoDecimal = false;
+            if (!currentNumStr.includes('.') && currentNumStr.endsWith('0')) {
+                hasTrailingNoDecimal = true;
+                rules.push(`<span style="color: ${trailingColor};"><strong>Trailing zeros without a decimal point</strong> are <em>not</em> significant.</span>`);
+            }
+
             // Fallback for simple integers
             if (rules.length === 0) {
                 rules.push("All non-zero integers are significant.");
@@ -465,7 +469,7 @@
             // Determine which digits are significant
             let significantIndices = new Set();
 
-            // All digits are significant except leading zeros
+            // All digits are significant except leading zeros AND trailing zeros without decimal
             if (currentNumStr.startsWith('0.')) {
                 let leadingPart = currentNumStr.match(/^0\.0*/)[0];
                 // Everything after leading zeros is significant
@@ -475,8 +479,17 @@
                     }
                 }
             } else {
-                // All non-decimal digits are significant
-                for (let idx = 0; idx < currentNumStr.length; idx++) {
+                // For integers without decimal: exclude trailing zeros
+                let endIdx = currentNumStr.length;
+                if (!currentNumStr.includes('.')) {
+                    // Find where trailing zeros start
+                    while (endIdx > 0 && currentNumStr[endIdx - 1] === '0') {
+                        endIdx--;
+                    }
+                }
+
+                // Mark significant digits
+                for (let idx = 0; idx < endIdx; idx++) {
                     if (currentNumStr[idx] !== '.') {
                         significantIndices.add(idx);
                     }
@@ -501,8 +514,8 @@
                     let isSignificant = significantIndices.has(globalIdx);
                     let underline = isSignificant ? 'text-decoration: underline; text-decoration-color: #d20f39; text-decoration-thickness: 2px;' : '';
 
-                    // Check if this is a trailing zero
-                    if (hasTrailing && char === '0' && j >= remaining.lastIndexOf('0') && remaining.substring(j).match(/^0+$/)) {
+                    // Check if this is a trailing zero (WITH decimal)
+                    if (hasTrailing && char === '0' && remaining.substring(j).match(/^0+$/)) {
                         result += `<span style="color: ${trailingColor}; font-weight: bold; ${underline}">${remaining.substring(j)}</span>`;
                         break;
                     }
@@ -535,6 +548,41 @@
                     }
                 }
 
+                // Handle trailing zeros WITHOUT decimal (not significant, but colored)
+                if (hasTrailingNoDecimal && !currentNumStr.includes('.')) {
+                    // Find where trailing zeros start in the result
+                    let trailingStart = currentNumStr.length - 1;
+                    while (trailingStart >= 0 && currentNumStr[trailingStart] === '0') {
+                        trailingStart--;
+                    }
+                    trailingStart++; // Move to first trailing zero
+
+                    // Rebuild result with colored trailing zeros
+                    let beforeTrailing = '';
+                    let trailingZeros = '';
+                    for (let idx = 0; idx < currentNumStr.length; idx++) {
+                        if (idx < trailingStart) {
+                            let isSignificant = significantIndices.has(idx);
+                            let underline = isSignificant ? 'text-decoration: underline; text-decoration-color: #d20f39; text-decoration-thickness: 2px;' : '';
+                            beforeTrailing += isSignificant ? `<span style="${underline}">${currentNumStr[idx]}</span>` : currentNumStr[idx];
+                        } else {
+                            trailingZeros += currentNumStr[idx];
+                        }
+                    }
+                    result = beforeTrailing + `<span style="color: ${trailingColor}; font-weight: bold;">${trailingZeros}</span>`;
+                    numberEl.innerHTML = result;
+                } else {
+                    numberEl.innerHTML = result;
+                }
+            } else {
+                // No special highlighting needed, but still underline significant digits
+                let result = '';
+                for (let idx = 0; idx < currentNumStr.length; idx++) {
+                    let char = currentNumStr[idx];
+                    let isSignificant = significantIndices.has(idx);
+                    let underline = isSignificant ? 'text-decoration: underline; text-decoration-color: #d20f39; text-decoration-thickness: 2px;' : '';
+                    result += isSignificant ? `<span style="${underline}">${char}</span>` : char;
+                }
                 numberEl.innerHTML = result;
             }
 
@@ -565,6 +613,11 @@
             explanationEl.innerHTML = rules.join('<br>');
             document.getElementById('showAnswerBtn').style.display = 'none';
         }
+
+        // Initialize first problem on page load
+        window.addEventListener('DOMContentLoaded', function () {
+            generateProblem();
+        });
     </script>
     <script src="math_practice.js"></script>
 </body>
