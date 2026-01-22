@@ -121,13 +121,17 @@
                 <div class="practice-problem" id="targetNumber">Loading...</div>
 
                 <div class="input-group">
-                    <input type="number" id="userGuess" class="practice-input" min="1" placeholder="#">
+                    <input type="number" id="userGuess" class="practice-input" min="1" placeholder="0">
                     <button class="btn" onclick="checkAnswer()">Check</button>
                     <button class="btn" onclick="generateProblem()"
                         style="background-color: var(--secondary-color);">Next</button>
                 </div>
 
                 <div id="feedback" class="feedback"></div>
+                <button id="showAnswerBtn" class="btn" onclick="showAnswer()"
+                    style="display:none; background-color: var(--accent-color); margin-top: 0.5rem;">Show
+                    Answer</button>
+                <div id="explanation" class="feedback-explanation"></div>
             </div>
         </section>
 
@@ -229,6 +233,7 @@
 
     <script>
         let currentSigFigs = 0;
+        let currentType = 0;
 
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -242,40 +247,38 @@
             // 3: Trailing zeros with decimal e.g., 150.00
 
             const type = getRandomInt(0, 3);
+            currentType = type;
             let numStr = "";
             let sfs = 0;
 
-            if (type === 0) { // Large Integers (non-ambiguous, ensure no trailing zero)
+            if (type === 0) { // Large Integers
                 let val = getRandomInt(1000, 999999);
                 numStr = val.toString();
-                // Ensure it doesn't end in 0 to avoid ambiguity
                 if (numStr.endsWith('0')) numStr = numStr.slice(0, -1) + getRandomInt(1, 9);
                 sfs = numStr.length;
             }
-            else if (type === 1) { // Leading zeros (small numbers)
+            else if (type === 1) { // Leading zeros
                 let zeros = "0.";
-                for (let i = 0; i < getRandomInt(2, 5); i++) zeros += "0"; // More leading zeros
+                for (let i = 0; i < getRandomInt(2, 5); i++) zeros += "0";
                 let val = getRandomInt(1, 9999);
-                // Ensure val doesn't end in 0 so we don't accidentally make a trailing zero case here (handled separately)
                 while (val.toString().endsWith('0')) val = getRandomInt(1, 9999);
                 numStr = zeros + val;
                 sfs = val.toString().length;
             }
-            else if (type === 2) { // Captive zeros (Confusing case)
+            else if (type === 2) { // Captive zeros
                 let start = getRandomInt(1, 99);
                 let end = getRandomInt(1, 99);
                 let mid = "";
-                for (let i = 0; i < getRandomInt(2, 4); i++) mid += "0"; // 2 to 4 zeros in middle
+                for (let i = 0; i < getRandomInt(2, 4); i++) mid += "0";
                 numStr = start + mid + end;
                 sfs = numStr.length;
             }
-            else if (type === 3) { // Trailing zeros with decimal (Precision case)
+            else if (type === 3) { // Trailing zeros with decimal
                 let val = getRandomInt(10, 9999);
                 numStr = val.toString();
                 if (!numStr.includes('.')) numStr += ".";
-                let added = getRandomInt(1, 4); // 1 to 4 trailing zeros
+                let added = getRandomInt(1, 4);
                 for (let i = 0; i < added; i++) numStr += "0";
-                // Sig figs = digits + trailing zeros
                 sfs = numStr.replace('.', '').length;
             }
 
@@ -283,6 +286,8 @@
             currentSigFigs = sfs;
             document.getElementById('userGuess').value = '';
             document.getElementById('feedback').textContent = '';
+            document.getElementById('explanation').textContent = '';
+            document.getElementById('showAnswerBtn').style.display = 'none';
             document.getElementById('feedback').className = 'feedback';
             document.getElementById('userGuess').focus();
         }
@@ -300,10 +305,31 @@
             if (userVal === currentSigFigs) {
                 feedbackEl.textContent = "Correct! Great job.";
                 feedbackEl.className = 'feedback correct';
+                document.getElementById('showAnswerBtn').style.display = 'none';
+                document.getElementById('explanation').textContent = '';
             } else {
-                feedbackEl.textContent = `Incorrect. The correct answer was ${currentSigFigs}.`;
+                feedbackEl.textContent = "Incorrect. Try again!";
                 feedbackEl.className = 'feedback incorrect';
+                document.getElementById('showAnswerBtn').style.display = 'inline-block';
             }
+        }
+
+        function showAnswer() {
+            const feedbackEl = document.getElementById('feedback');
+            const explanationEl = document.getElementById('explanation');
+
+            feedbackEl.textContent = `The correct answer is ${currentSigFigs}.`;
+            feedbackEl.className = 'feedback incorrect'; // Keep warning color
+
+            let exp = "";
+            switch (currentType) {
+                case 0: exp = "All non-zero integers are significant."; break;
+                case 1: exp = "Leading zeros are NEVER significant. They only place the decimal."; break;
+                case 2: exp = "Captive zeros (sandwiched between non-zeros) are ALWAYS significant."; break;
+                case 3: exp = "Trailing zeros are significant ONLY when there is a decimal point."; break;
+            }
+            explanationEl.textContent = exp;
+            document.getElementById('showAnswerBtn').style.display = 'none';
         }
 
         // Init
