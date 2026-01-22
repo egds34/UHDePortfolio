@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" id="leadingZerosCard">
                     <h4>Leading Zeros</h4>
                     <ul class="rules-list">
                         <li>Zeros that precede all non-zero digits.</li>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" id="captiveZerosCard">
                     <h4>Captive Zeros</h4>
                     <ul class="rules-list">
                         <li>Zeros between non-zero digits.</li>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" id="trailingZerosCard">
                     <h4>Trailing Zeros</h4>
                     <ul class="rules-list">
                         <li>Zeros at the right end of the number.</li>
@@ -290,6 +290,15 @@
             document.getElementById('explanation').innerHTML = '';
             document.getElementById('showAnswerBtn').style.display = 'none';
             document.getElementById('feedback').className = 'feedback';
+
+            // Reset card highlighting
+            const leadingCard = document.getElementById('leadingZerosCard');
+            const captiveCard = document.getElementById('captiveZerosCard');
+            const trailingCard = document.getElementById('trailingZerosCard');
+            if (leadingCard) leadingCard.style.backgroundColor = '';
+            if (captiveCard) captiveCard.style.backgroundColor = '';
+            if (trailingCard) trailingCard.style.backgroundColor = '';
+
             document.getElementById('userGuess').focus();
         }
 
@@ -340,7 +349,7 @@
             // 1. Leading Zeros
             if (currentNumStr.startsWith("0.")) {
                 hasLeading = true;
-                rules.push(`<span style="color: ${leadingColor};"><strong>Leading zeros</strong> (start of decimal) are <em>never</em> significant.</span>`);
+                rules.push(`<span style="color: ${leadingColor};"><strong>Leading zeros</strong> are <em>never</em> significant.</span>`);
             }
 
             // 2. Captive Zeros (zeros between non-zeros)
@@ -447,6 +456,30 @@
 
                 result += processedRemaining;
                 numberEl.innerHTML = result;
+            }
+
+            // Highlight the corresponding rule cards
+            const leadingCard = document.getElementById('leadingZerosCard');
+            const captiveCard = document.getElementById('captiveZerosCard');
+            const trailingCard = document.getElementById('trailingZerosCard');
+
+            // Reset all cards first
+            if (leadingCard) leadingCard.style.backgroundColor = '';
+            if (captiveCard) captiveCard.style.backgroundColor = '';
+            if (trailingCard) trailingCard.style.backgroundColor = '';
+
+            // Highlight applicable cards
+            if (hasLeading && leadingCard) {
+                leadingCard.style.backgroundColor = `${leadingColor}22`;
+                leadingCard.style.transition = 'background-color 0.3s ease';
+            }
+            if (hasCaptive && captiveCard) {
+                captiveCard.style.backgroundColor = `${captiveColor}22`;
+                captiveCard.style.transition = 'background-color 0.3s ease';
+            }
+            if (hasTrailing && trailingCard) {
+                trailingCard.style.backgroundColor = `${trailingColor}22`;
+                trailingCard.style.transition = 'background-color 0.3s ease';
             }
 
             explanationEl.innerHTML = rules.join('<br>');
